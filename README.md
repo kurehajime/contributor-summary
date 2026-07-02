@@ -1,5 +1,8 @@
 # kurehajime/contributor-summary
 
+<img width="2220" height="1464" alt="head" src="" />
+
+
 `kurehajime/contributor-summary` is a GitHub Action that summarizes a user's recent public pull request and issue activity across external repositories.
 
 It is useful when you want a quick, linkable contribution history for a pull request author, especially for first-time or external contributors.
