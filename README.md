@@ -2,13 +2,13 @@
 
 **Spot AI slop. Stop the flood.**
 
-<img width="2220" height="1464" alt="head" src="https://github.com/user-attachments/assets/0a264691-d02c-4de8-8d97-39dbee45e570" />
+<img width="2220" height="1464" alt="Screenshot of Contributor Summary showing PR metrics for spotting potential AI slop" src="https://github.com/user-attachments/assets/0a264691-d02c-4de8-8d97-39dbee45e570" />
 
 
 
 `kurehajime/contributor-summary` is a GitHub Action that summarizes a user's recent public pull request and issue activity across external repositories.
 
-It helps you assess the trustworthiness of a pull request author, especially first-time or external contributors, by providing a quick, linkable contribution history.
+It helps maintainers spot suspicious high-volume contribution patterns without discouraging good-faith newcomers — useful as a signal, not a verdict.
 
 ## What It Reports
 
