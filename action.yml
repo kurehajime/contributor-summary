@@ -1,0 +1,57 @@
+name: GitHub Contributor Summary
+description: Summarize a user's recent public pull request and issue activity across external repositories.
+
+inputs:
+  github-user:
+    description: GitHub user ID to audit.
+    required: true
+  months:
+    description: Number of past months to scan.
+    required: false
+    default: "3"
+  exclude-self:
+    description: Exclude repositories owned by the audited user.
+    required: false
+    default: "true"
+  exclude-organizations:
+    description: Exclude repositories owned by public organizations that the audited user belongs to.
+    required: false
+    default: "true"
+  github-token:
+    description: Optional GitHub token for API requests. If omitted, public unauthenticated API requests are used.
+    required: false
+    default: ""
+
+outputs:
+  pull-request-search-url:
+    description: GitHub web search URL for the pull request query.
+  issue-search-url:
+    description: GitHub web search URL for the issue query.
+  unique-repository-count:
+    description: Number of unique repositories that received pull requests or issues.
+  opened-count:
+    description: Number of pull requests and issues opened in the scanned window.
+  opened-pull-request-count:
+    description: Number of pull requests opened in the scanned window.
+  opened-issue-count:
+    description: Number of issues opened in the scanned window.
+  merged-pull-request-count:
+    description: Number of pull requests merged in the scanned window.
+  closed-unmerged-pull-request-count:
+    description: Number of pull requests closed without merge in the scanned window.
+  pull-request-rejection-rate:
+    description: Pull request rejection rate, calculated as closed without merge divided by opened pull requests.
+  closed-issue-count:
+    description: Number of issues closed in the scanned window.
+  open-pull-request-count:
+    description: Number of pull requests that are still open.
+  open-issue-count:
+    description: Number of issues that are still open.
+  summary-json:
+    description: Summary JSON string.
+  summary-markdown:
+    description: Summary Markdown string.
+
+runs:
+  using: node24
+  main: dist/index.js

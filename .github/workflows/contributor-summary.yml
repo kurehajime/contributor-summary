@@ -1,0 +1,37 @@
+name: Contributor Summary
+
+on:
+  pull_request_target:
+    types:
+      - opened
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out base branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+
+      - name: Summarize contributor activity
+        id: contributor-summary
+        uses: ./
+        with:
+          github-user: ${{ github.event.pull_request.user.login }}
+          months: "12"
+
+      - name: Comment audit summary
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          SUMMARY_MARKDOWN: ${{ steps.contributor-summary.outputs.summary-markdown }}
+        run: |
+          body_file="$(mktemp)"
+          printf '%s\n' "$SUMMARY_MARKDOWN" >"$body_file"
+          gh pr comment "$PR_URL" --body-file "$body_file"

@@ -1,0 +1,64 @@
+name: Manual Contributor Summary
+
+on:
+  workflow_dispatch:
+    inputs:
+      github-user:
+        description: GitHub user ID to summarize.
+        required: true
+        type: string
+      months:
+        description: Number of past months to scan.
+        required: true
+        default: "3"
+        type: string
+      exclude-self:
+        description: Exclude repositories owned by the audited user.
+        required: true
+        default: true
+        type: boolean
+      exclude-organizations:
+        description: Exclude repositories owned by public organizations that the audited user belongs to.
+        required: true
+        default: true
+        type: boolean
+      use-github-token:
+        description: Use github.token for higher API rate limits.
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    outputs:
+      pull-request-search-url: ${{ steps.contributor-summary.outputs.pull-request-search-url }}
+      issue-search-url: ${{ steps.contributor-summary.outputs.issue-search-url }}
+      unique-repository-count: ${{ steps.contributor-summary.outputs.unique-repository-count }}
+      opened-count: ${{ steps.contributor-summary.outputs.opened-count }}
+      opened-pull-request-count: ${{ steps.contributor-summary.outputs.opened-pull-request-count }}
+      opened-issue-count: ${{ steps.contributor-summary.outputs.opened-issue-count }}
+      merged-pull-request-count: ${{ steps.contributor-summary.outputs.merged-pull-request-count }}
+      closed-unmerged-pull-request-count: ${{ steps.contributor-summary.outputs.closed-unmerged-pull-request-count }}
+      pull-request-rejection-rate: ${{ steps.contributor-summary.outputs.pull-request-rejection-rate }}
+      closed-issue-count: ${{ steps.contributor-summary.outputs.closed-issue-count }}
+      open-pull-request-count: ${{ steps.contributor-summary.outputs.open-pull-request-count }}
+      open-issue-count: ${{ steps.contributor-summary.outputs.open-issue-count }}
+      summary-json: ${{ steps.contributor-summary.outputs.summary-json }}
+      summary-markdown: ${{ steps.contributor-summary.outputs.summary-markdown }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Summarize contributor activity
+        id: contributor-summary
+        uses: ./
+        with:
+          github-user: ${{ inputs['github-user'] }}
+          months: ${{ inputs.months }}
+          exclude-self: ${{ inputs['exclude-self'] }}
+          exclude-organizations: ${{ inputs['exclude-organizations'] }}
+          github-token: ${{ inputs['use-github-token'] && github.token || '' }}
