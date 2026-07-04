@@ -1,5 +1,7 @@
 name: GitHub Contributor Summary
 description: Summarize a user's recent public pull request and issue activity across external repositories.
+icon: bar-chart
+color: blue
 
 inputs:
   github-user:
