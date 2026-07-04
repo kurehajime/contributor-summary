@@ -2,9 +2,9 @@
 
 **Spot AI slop. Stop the flood.**
 
-<img width="2220" height="1464" alt="Screenshot of Contributor Summary showing PR metrics for spotting potential AI slop" src="https://github.com/user-attachments/assets/0a264691-d02c-4de8-8d97-39dbee45e570" />
-
-
+<kbd>
+  <img width="2220" height="1464" alt="Screenshot of Contributor Summary showing PR metrics for spotting potential AI slop" src="https://github.com/user-attachments/assets/0a264691-d02c-4de8-8d97-39dbee45e570" />
+</kbd>
 
 `kurehajime/contributor-summary` is a GitHub Action that summarizes a user's recent public pull request and issue activity across external repositories.
 
