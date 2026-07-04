@@ -1,8 +1,9 @@
 name: GitHub Contributor Summary
 description: Summarize a user's recent public pull request and issue activity across external repositories.
-icon: bar-chart
-color: blue
-
+author: kurehajime
+branding:
+  icon: 'bar-chart'
+  color: 'blue'
 inputs:
   github-user:
     description: GitHub user ID to audit.
