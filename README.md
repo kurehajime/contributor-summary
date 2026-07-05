@@ -28,6 +28,10 @@ The generated summary includes:
 
 Only public GitHub activity is included.
 
+## Web Version
+
+You can also try the browser-only version at <https://kurehajime.github.io/contributor-summary/>.
+
 ## Usage
 
 Add the action to a workflow and pass the GitHub login you want to summarize.
