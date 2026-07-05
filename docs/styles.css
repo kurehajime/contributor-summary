@@ -146,6 +146,19 @@ button:disabled {
   color: var(--danger);
 }
 
+.result-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.result-heading h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
 .markdown-preview {
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -237,7 +250,6 @@ tr:last-child td {
   .toggles {
     grid-column: 1 / -1;
   }
-
 }
 
 @media (max-width: 560px) {
@@ -251,6 +263,11 @@ tr:last-child td {
   }
 
   .toggles {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .result-heading {
     align-items: flex-start;
     flex-direction: column;
   }

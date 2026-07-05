@@ -3,6 +3,8 @@ const runButton = document.querySelector("#run-button");
 const statusBox = document.querySelector("#status");
 const results = document.querySelector("#results");
 const markdownPreview = document.querySelector("#markdown-preview");
+const copyButton = document.querySelector("#copy-markdown");
+let currentMarkdown = "";
 
 function setStatus(message, tone = "neutral") {
   statusBox.textContent = message;
@@ -101,6 +103,7 @@ function appendTable(container, lines, startIndex) {
 }
 
 function renderMarkdown(markdown) {
+  currentMarkdown = markdown;
   const lines = markdown.split(/\r?\n/);
   const fragment = document.createDocumentFragment();
   let index = 0;
@@ -126,6 +129,36 @@ function renderMarkdown(markdown) {
   markdownPreview.replaceChildren(fragment);
 }
 
+async function copyText(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.setAttribute("readonly", "");
+  textArea.style.position = "fixed";
+  textArea.style.opacity = "0";
+  document.body.append(textArea);
+  textArea.select();
+  document.execCommand("copy");
+  textArea.remove();
+}
+
+async function copyMarkdown() {
+  if (!currentMarkdown) {
+    return;
+  }
+
+  await copyText(currentMarkdown);
+  const originalText = copyButton.textContent;
+  copyButton.textContent = "Copied";
+  window.setTimeout(() => {
+    copyButton.textContent = originalText;
+  }, 1200);
+}
+
 async function runSummary(event) {
   event.preventDefault();
   const data = new FormData(form);
@@ -133,7 +166,9 @@ async function runSummary(event) {
   const months = String(data.get("months") ?? "12").trim();
 
   runButton.disabled = true;
+  copyButton.disabled = true;
   results.hidden = true;
+  currentMarkdown = "";
   setStatus("Fetching public GitHub activity...");
 
   try {
@@ -145,6 +180,7 @@ async function runSummary(event) {
     });
     renderMarkdown(summaryMarkdown);
     results.hidden = false;
+    copyButton.disabled = false;
     setStatus(`Summary ready for ${summary.user}.`, "success");
   } catch (error) {
     setStatus(error instanceof Error ? error.message : String(error), "error");
@@ -154,3 +190,8 @@ async function runSummary(event) {
 }
 
 form.addEventListener("submit", runSummary);
+copyButton.addEventListener("click", () => {
+  copyMarkdown().catch((error) => {
+    setStatus(error instanceof Error ? error.message : String(error), "error");
+  });
+});

@@ -1,53 +1,60 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Contributor Summary</title>
-    <link rel="stylesheet" href="./styles.css">
-  </head>
-  <body>
-    <main class="app-shell">
-      <section class="toolbar" aria-label="Contributor search controls">
-        <div class="title-block">
-          <h1>Contributor Summary</h1>
-          <p>Inspect public PR and issue activity from external contributors.</p>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contributor Summary</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+  <main class="app-shell">
+    <section class="toolbar" aria-label="Contributor search controls">
+      <div class="title-block">
+        <h1>Contributor Summary</h1>
+        <p>Inspect public PR and issue activity from external contributors.</p>
+      </div>
+
+      <form id="summary-form" class="controls">
+        <label>
+          GitHub user
+          <input id="github-user" name="github-user" autocomplete="username" placeholder="octocat" required>
+        </label>
+
+        <label>
+          Months
+          <input id="months" name="months" type="number" min="1" step="1" value="12" required>
+        </label>
+
+        <div class="toggles" aria-label="Exclusions">
+          <label class="check">
+            <input id="exclude-self" name="exclude-self" type="checkbox" checked>
+            Exclude user-owned repos
+          </label>
+          <label class="check">
+            <input id="exclude-organizations" name="exclude-organizations" type="checkbox" checked>
+            Exclude repos from orgs they belong to
+          </label>
         </div>
 
-        <form id="summary-form" class="controls">
-          <label>
-            GitHub user
-            <input id="github-user" name="github-user" autocomplete="username" placeholder="octocat" required>
-          </label>
+        <button id="run-button" type="submit">Run summary</button>
+      </form>
+    </section>
 
-          <label>
-            Months
-            <input id="months" name="months" type="number" min="1" step="1" value="12" required>
-          </label>
+    <section id="status" class="status" aria-live="polite"></section>
 
-          <div class="toggles" aria-label="Exclusions">
-            <label class="check">
-              <input id="exclude-self" name="exclude-self" type="checkbox" checked>
-              Exclude user-owned repos
-            </label>
-            <label class="check">
-              <input id="exclude-organizations" name="exclude-organizations" type="checkbox" checked>
-              Exclude public org repos
-            </label>
-          </div>
+    <section id="results" class="results" hidden>
+      <div class="result-heading">
+        <h2>Result</h2>
+        <button id="copy-markdown" type="button">Copy Markdown</button>
+      </div>
+      <article id="markdown-preview" class="markdown-preview" aria-label="Formatted contributor summary"></article>
+    </section>
+  </main>
 
-          <button id="run-button" type="submit">Run summary</button>
-        </form>
-      </section>
+  <script src="../dist/core.js"></script>
+  <script src="./app.js"></script>
+</body>
 
-      <section id="status" class="status" aria-live="polite"></section>
-
-      <section id="results" class="results" hidden>
-        <article id="markdown-preview" class="markdown-preview" aria-label="Formatted contributor summary"></article>
-      </section>
-    </main>
-
-    <script src="../dist/core.js"></script>
-    <script src="./app.js"></script>
-  </body>
 </html>
