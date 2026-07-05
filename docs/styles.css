@@ -1,0 +1,261 @@
+:root {
+  color-scheme: light;
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-alt: #eef3f8;
+  --text: #17202a;
+  --muted: #5d6875;
+  --line: #ccd5df;
+  --accent: #0f766e;
+  --accent-strong: #0b5f59;
+  --warn: #8a4b10;
+  --danger: #a82424;
+  --success: #22623b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+a {
+  color: var(--accent-strong);
+}
+
+.app-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 40px;
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.7fr) minmax(320px, 1.3fr);
+  gap: 24px;
+  align-items: start;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.title-block h1 {
+  margin: 0 0 6px;
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+.title-block p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 110px auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.controls label {
+  display: grid;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.controls input {
+  width: 100%;
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 7px 10px;
+  color: var(--text);
+  background: var(--surface);
+}
+
+.controls input:focus {
+  outline: 2px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-color: var(--accent);
+}
+
+.toggles {
+  grid-column: 1 / span 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+
+.controls .check {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  color: var(--text);
+}
+
+.check input {
+  width: 16px;
+  min-height: 16px;
+  margin: 0;
+}
+
+button {
+  min-height: 38px;
+  border: 1px solid var(--accent-strong);
+  border-radius: 6px;
+  padding: 7px 14px;
+  color: #ffffff;
+  background: var(--accent);
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--accent-strong);
+}
+
+button:disabled {
+  border-color: var(--line);
+  background: #89939e;
+  cursor: wait;
+}
+
+.status {
+  min-height: 28px;
+  margin: 14px 0;
+  color: var(--muted);
+  white-space: pre-wrap;
+}
+
+.status[data-tone="success"] {
+  color: var(--success);
+}
+
+.status[data-tone="error"] {
+  color: var(--danger);
+}
+
+.markdown-preview {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px;
+  background: var(--surface);
+}
+
+.markdown-preview h1,
+.markdown-preview h2,
+.markdown-preview h3,
+.markdown-preview p,
+.markdown-preview ul {
+  margin-top: 0;
+}
+
+.markdown-preview h1 {
+  margin-bottom: 8px;
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+.markdown-preview h2 {
+  margin-top: 28px;
+  margin-bottom: 10px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--line);
+  font-size: 19px;
+}
+
+.markdown-preview h3 {
+  margin-top: 22px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.markdown-preview p {
+  margin-bottom: 10px;
+}
+
+.markdown-preview ul {
+  padding-left: 22px;
+}
+
+.markdown-preview li {
+  margin-bottom: 7px;
+}
+
+table {
+  width: 100%;
+  margin: 8px 0 18px;
+  overflow: hidden;
+  border-collapse: collapse;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+th,
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+th {
+  background: var(--surface-alt);
+  color: var(--muted);
+  font-weight: 600;
+}
+
+tr:last-child td {
+  border-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .controls {
+    grid-template-columns: 1fr 110px auto;
+  }
+
+  .toggles {
+    grid-column: 1 / -1;
+  }
+
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    width: min(100% - 20px, 1180px);
+    padding-top: 18px;
+  }
+
+  .controls {
+    grid-template-columns: 1fr;
+  }
+
+  .toggles {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .markdown-preview {
+    padding: 16px;
+  }
+}
