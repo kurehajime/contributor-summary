@@ -172,7 +172,7 @@ async function runSummary(event) {
   setStatus("Fetching public GitHub activity...");
 
   try {
-    const { summary, summaryMarkdown } = await window.ContributorSummary.summarizeContributorActivity({
+    const { summaryMarkdown } = await window.ContributorSummary.summarizeContributorActivity({
       user,
       months,
       excludeSelf: data.has("exclude-self"),
@@ -181,7 +181,7 @@ async function runSummary(event) {
     renderMarkdown(summaryMarkdown);
     results.hidden = false;
     copyButton.disabled = false;
-    setStatus(`Summary ready for ${summary.user}.`, "success");
+    setStatus("");
   } catch (error) {
     setStatus(error instanceof Error ? error.message : String(error), "error");
   } finally {
