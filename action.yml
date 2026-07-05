@@ -1,5 +1,5 @@
 name: GitHub Contributor Summary
-description: contributor-summary is a GitHub Action that summarizes a user's recent public pull request and issue activity across external repositories.Spot AI slop. Stop the flood.
+description: Summarize external contributors' public PR and issue activity to spot high-volume PR bursts.
 author: kurehajime
 branding:
   icon: 'bar-chart'
